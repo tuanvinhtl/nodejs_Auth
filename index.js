@@ -1,21 +1,28 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const swagerDoc =require('./swaggerDoc');
 
 dotenv.config();
 
-mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopology: true }, err => {
+mongoose.connect(
+  process.env.DB_CONNECT,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  err => {
     console.log(err);
-})
+  }
+);
 
-const authRoute = require('./routes/auth');
-const postRoute = require('./routes/getInfoDatatable');
+const authRoute = require("./routes/auth");
+const postRoute = require("./routes/getInfoDatatable");
+const usersRoute = require("./routes/users-controller");
 
-app.use(express.json())
+swagerDoc(app);
+app.use(express.json());
 
+app.use("/api/user", authRoute);
+app.use("/api/getInfo", postRoute);
+app.use("/api/users", usersRoute);
 
-app.use('/api/user', authRoute);
-app.use('/api/getInfo', postRoute);
-
-app.listen(3000, () => console.log('server are stared'));
+app.listen(3000, () => console.log("server are stared"));

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePagging =require('mongoose-paginate');
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -25,4 +26,5 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+userSchema.plugin(mongoosePagging);
 module.exports = mongoose.model('User', userSchema)
