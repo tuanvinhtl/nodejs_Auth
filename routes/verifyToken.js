@@ -1,12 +1,15 @@
 const jwt = require("jsonwebtoken");
+const path = require('path');
 
-module.exports = (req, res, next)=> {
+module.exports = (req, res, next) => {
   const token = req.header("auth-token");
-  if (!token) return res.status(401).send("Access Denied");
+  if (!token) {
+    res.sendFile(path.join(__dirname + '/render-page/login.html'));
+    return res;
+  };
 
   try {
     const verifyed = jwt.verify(token, process.env.TOKEN_SECRET);
-    console.log(verifyed)
     req.user = verifyed;
     next();
   } catch (error) {
