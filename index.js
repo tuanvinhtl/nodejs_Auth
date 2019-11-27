@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const swagerDoc =require('./swaggerDoc');
+const swagerDoc = require('./swaggerDoc');
+const path = require('path');
 
 dotenv.config();
 
@@ -19,7 +20,9 @@ const postRoute = require("./routes/getInfoDatatable");
 const usersRoute = require("./routes/users-controller");
 
 swagerDoc(app);
+
 app.use(express.json());
+app.use(express.static(path.join(__dirname + '/public/')));
 
 app.use("/api/user", authRoute);
 app.use("/api/getInfo", postRoute);

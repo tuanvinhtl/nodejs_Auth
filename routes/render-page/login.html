@@ -78,9 +78,9 @@
 <body>
 
     <div style="width: 500px; height: 300px; margin: auto auto;">
-        <form name="loginform" onSubmit="return validateForm();" action="index.html" method="post">
+        <form name="loginform" onSubmit="return validateForm();" method="post">
             <div class="imgcontainer">
-                <img src="/login-avt.png" alt="Avatar" class="avatar">
+                <img src="/images/avata.jpg" alt="Avatar" class="avatar">
             </div>
 
             <div class="container">
@@ -103,26 +103,7 @@
         </form>
     </div>
 
-    <script>
-        function validateForm() {
-            var un = document.loginform.uname.value;
-            var pw = document.loginform.psw.value;
-            var username = "usernasme";
-            var password = "password";
-            if ((un == username) && (pw == password)) {
-                return true;
-            }
-            else {
-                alert("Login was unsuccessful, please check your username and password");
-                return false;
-            }
-        }
-
-        function loginUser(usr, psw) {
-            xhttp.open("POST", "http://localhost:3000/api/user/login", true);
-            xhttp.send();
-        }
-    </script>
+    <script src="/js/login.js"></script>
 </body>
 
 </html>
